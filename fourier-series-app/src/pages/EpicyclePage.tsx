@@ -140,6 +140,9 @@ export default function EpicyclePage() {
       <Typography variant="h1" fontSize={50}>
         Fourier Series Interactive Demo
       </Typography>
+      <Typography variant="h2" fontSize={30}>
+        This is a demonstration of fourier series, where adding a bunch of circles of different sizes rotating at different frequencies can draw any picture we want!
+      </Typography>
       <Typography variant="subtitle1">
         First select a mode. If you select the drawing mode, draw a picture in the box below and then click play. Otherwise, press play and watch the animation!
       </Typography>
