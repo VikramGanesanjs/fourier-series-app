@@ -1,11 +1,12 @@
 import React, { useState, useRef } from 'react'
 import useWindowDimensions from '../hooks/useWindowDimensions'
-import { Button, Box, Slider, Typography, FormControl, InputLabel, Select, MenuItem} from '@mui/material'
+import { Button, Box, Slider, Typography, FormControl, InputLabel, Select, MenuItem, Link} from '@mui/material'
 import Epicycle from '../components/Epicycle'
 import { dft } from '../utils/distance'
 import { skullPath } from '../utils/skull'
 import { squarePath } from '../utils/square'
 import { Stage, Line, Layer } from 'react-konva'
+import { useNavigate } from 'react-router-dom'
 
 interface DFT {
   freq: number,
@@ -16,6 +17,8 @@ interface DFT {
 }
 
 export default function EpicyclePage() {
+
+  const navigate = useNavigate()
   const { width, height } = useWindowDimensions()
   const [pause, setPause] = useState(true)
   const [points, setPoints] = useState<number[][]>([]);
@@ -131,7 +134,18 @@ export default function EpicyclePage() {
   
   
   return (
-    <Box sx={{display: 'flex', flexDirection: 'column', gap: 2, width: '100vw', height: '100vh', alignItems: 'center', justifyContent: 'center'}}>
+    <Box sx={{display: 'flex', flexDirection: 'column', gap: 2, width: '100%', height: '100%', alignItems: 'center',p: 0,}}>
+      <Typography variant="h1" fontSize={50}>
+        Fourier Series Interactive Demo
+      </Typography>
+      <Typography variant="subtitle1">
+        First select a mode. If you select the drawing mode, draw a picture in the box below and then click play. Otherwise, press play and watch the animation!
+      </Typography>
+      <Link onClick={() => navigate("/about")}>
+        <Typography variant="subtitle2">
+          For an explanation of why this works, visit this page
+        </Typography>
+      </Link>
       <FormControl fullWidth>
   <InputLabel id="demo-simple-select-label">Mode</InputLabel>
   <Select
