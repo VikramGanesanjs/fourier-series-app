@@ -27,7 +27,7 @@ export default function ExplanationPage() {
     if(copySin.length > 500){
       copySin.splice(500)
     }
-    let flat =  []
+    let flat:number[] =  []
     copyCos.forEach((value, index) => {
       flat.push(index * 4)
       flat.push(250 + value)
@@ -79,7 +79,7 @@ export default function ExplanationPage() {
         size="small"
         defaultValue={freq}
         aria-label="Small"
-        onChange={(e, value) => setFreq(value)}
+        onChange={(e, value) => setFreq(value as number)}
         valueLabelDisplay="auto"
         />
         </Box>

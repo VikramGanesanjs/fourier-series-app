@@ -52,7 +52,7 @@ export default function Epicycle({x, y, fourier, fps, dt, pause, width, height, 
     newYGraph.unshift(yval)
     setXGraph(newXGraph)
     setYGraph(newYGraph)
-    let formattedGraph2 = []
+    let formattedGraph2:number[] = []
     xgraph.forEach((x, idx) => {
       formattedGraph2.push(x)
       formattedGraph2.push(ygraph[idx])

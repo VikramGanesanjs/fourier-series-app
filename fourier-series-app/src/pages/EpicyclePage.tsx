@@ -6,6 +6,8 @@ import { dft } from '../utils/distance'
 import { skullPath } from '../utils/skull'
 import { squarePath } from '../utils/square'
 import { Stage, Line, Layer } from 'react-konva'
+import type { KonvaEventObject } from 'konva/lib/Node'
+import type { SelectChangeEvent } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 
 interface DFT {
@@ -29,18 +31,18 @@ export default function EpicyclePage() {
   const [fps, setFPS] = useState(60)
   const [mode, setMode] = useState("Draw")
 
-  const handleMouseDown = (e) => {
+  const handleMouseDown = (e:KonvaEventObject<MouseEvent>) => {
     if(drawEpicycle){
       return
     }
     isDrawing.current = true;
-    const pos = e.target.getStage().getPointerPosition();
+    const pos = e.target.getStage()?.getPointerPosition();
     let copy = [...points]
-    copy.push([pos.x, pos.y])
+    copy.push([pos?.x ?? 0, pos?.y ?? 0])
     setPoints(copy);
   };
 
-  const preProcessPoints = (points, epicycleWidth, epicycleHeight, removeStep) =>  {
+  const preProcessPoints = (points:number[][], epicycleWidth:number, epicycleHeight:number, removeStep:number) =>  {
     const points2 = points.map((point, idx) => {
       let x = point[0] - epicycleWidth/2;
       let y = point[1] - epicycleHeight/2;
@@ -54,19 +56,19 @@ export default function EpicyclePage() {
     return points2
   }
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: KonvaEventObject<MouseEvent>) => {
     if(drawEpicycle){
       return
     }
     if (!isDrawing.current) {
       return;
     }
-    const pos = e.target.getStage().getPointerPosition();
+    const pos = e.target.getStage()?.getPointerPosition();
     let copy = [...points]
-    copy.push([pos.x, pos.y])
+    copy.push([pos?.x ?? 0, pos?.y ?? 0])
     setPoints(copy);
     console.log(pos)
-    let flattenedPoints2 = [];
+    let flattenedPoints2:number[] = [];
     [...points].forEach((point) => {
       flattenedPoints2.push(point[0]);
       flattenedPoints2.push(point[1]);
@@ -79,7 +81,7 @@ export default function EpicyclePage() {
       return
     }
     isDrawing.current = false;
-    let flattenedPoints2 = [];
+    let flattenedPoints2:number[] = [];
     [...points].forEach((point) => {
       flattenedPoints2.push(point[0]);
       flattenedPoints2.push(point[1]);
@@ -93,7 +95,7 @@ export default function EpicyclePage() {
   const SKULL_EPICYCLE_WIDTH = 500
   const SKULL_EPICYCLE_HEIGHT = 500
 
-  function grabSkull(reduction, padding){
+  function grabSkull(reduction:number, padding:number){
     let skullPathString = skullPath;
     let skullPath2 = skullPathString.split("\n");
     let skull = [];
@@ -105,7 +107,7 @@ export default function EpicyclePage() {
     console.log(skull)
     return skull;
   }
-  function grabSquare(reduction, padding){
+  function grabSquare(reduction:number, padding:number){
     let squarePathString = squarePath;
     let squarePath2 = squarePathString.split("\n");
     let square = [];
@@ -118,7 +120,7 @@ export default function EpicyclePage() {
     return square;
   }
 
-  function handleModeChange(e){
+  function handleModeChange(e: SelectChangeEvent<string>){
     setMode(e.target.value)
     if(e.target.value == "Skull"){
       
@@ -170,7 +172,7 @@ export default function EpicyclePage() {
         size="small"
         defaultValue={fps}
         aria-label="Small"
-        onChange={(e, value) => setFPS(value)}
+        onChange={(e, value) => setFPS(value as number)}
         valueLabelDisplay="auto"
         />
       <Box sx={{flexDirection: 'row'}} >

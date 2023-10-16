@@ -5,17 +5,17 @@ export function distance(x1: number, x2: number, y1: number, y2:number): number{
 class Complex {
   re;
   im;
-  constructor(a, b) {
+  constructor(a: number, b:number) {
     this.re = a;
     this.im = b;
   }
 
-  add(c) {
+  add(c: Complex) {
     this.re += c.re;
     this.im += c.im;
   }
 
-  mult(c) {
+  mult(c: Complex) {
     const re = this.re * c.re - this.im * c.im;
     const im = this.re * c.im + this.im * c.re;
     return new Complex(re, im);
