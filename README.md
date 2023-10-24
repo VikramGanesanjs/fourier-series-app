@@ -1,11 +1,7 @@
 # README
+This is the source code for an interactive fourier series demo, as well as an explanation of it
 
-Hub for all OCSEF projects
+URL: fourierseriesdemo.netlify.app
 
-## /fourier-demo
-
-Copied from thecodingtrain, takes user drawing and redraws with fourier series
-
-## /fourier-series-app
-
-React/Vite web application that should be interactive fourier series
+## Structure
+This app was made using the Vite/React template, and it also uses the react-konva library for the canvas graphics. All of the important files are contained in the src directory
